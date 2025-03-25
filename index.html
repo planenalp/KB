@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klein.Blue</title>
+  <link rel="icon" type="image/svg+xml" href="https://planenalp.github.io/favicon.svg">
+  <style>
+    /* 保留原始视口高度处理 */
+    html, body {
+      margin: 0;
+      height: calc(var(--vh, 1vh) * 100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* 新增背景过渡 */
+      transition: background-color 0.3s ease;
+    }
+    
+    /* 保留原始缩放效果 */
+    img {
+      width: 30vmin;
+      height: 30vmin;
+      transition: 
+        transform 0.1s ease, /* 原始缩放动画 */
+        opacity 0.3s ease;  /* 淡入效果 */
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+    img:active {
+      transform: scale(0.9);
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 保留原始链接结构 -->
+  <a href="https://planenalp.github.io/">
+    <img id="theme-logo" alt="Logo">
+  </a>
+
+  <script>
+    // 保留原始视口高度计算逻辑
+    function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    // 保留原始触摸事件处理
+    document.addEventListener('touchstart', function() {}, false);
+
+    // 新增主题系统（不影响原有功能）
+    const themes = [
+      { background: "#002fa7", logo: "https://planenalp.github.io/avatar-whitesmoke.svg" },
+      { background: "#f5f5f5", logo: "https://planenalp.github.io/avatar-blue.svg" }
+    ];
+
+    // 预加载 logo 图片，确保切换时图像已缓存，从而减少移动端延迟
+    themes.forEach(theme => {
+      const img = new Image();
+      img.src = theme.logo;
+    });
+
+    // 用于记录当前主题下标
+    let currentThemeIndex = 0;
+
+    function applyTheme(theme) {
+      // 同步设置背景颜色并触发 CSS 过渡效果
+      document.body.style.backgroundColor = theme.background;
+
+      const logo = document.getElementById('theme-logo');
+      
+      // 立即更新 logo 源（图片采用预加载）
+      logo.src = theme.logo;
+
+      // 立即将 logo 设为透明
+      logo.style.opacity = 0;
+      // 强制浏览器重排，确保上述样式立即生效
+      void logo.offsetWidth;
+      // 立刻触发透明度变化，使 logo 与背景色同步淡入
+      logo.style.opacity = 1;
+    }
+
+    function toggleTheme() {
+      // 在两个主题之间切换
+      currentThemeIndex = currentThemeIndex === 0 ? 1 : 0;
+      applyTheme(themes[currentThemeIndex]);
+    }
+
+    // 初始化流程
+    function init() {
+      setVh();
+      // 随机选择一个主题作为默认
+      currentThemeIndex = Math.random() < 0.5 ? 0 : 1;
+      applyTheme(themes[currentThemeIndex]);
+    }
+
+    // 新增点击 logo 以外区域切换主题功能
+    const logoLink = document.querySelector('a[href="https://planenalp.github.io/"]');
+    document.addEventListener('click', function(e) {
+      // 如果点击目标不在 logoLink 或其子元素中，则切换主题
+      if (!logoLink.contains(e.target)) {
+        toggleTheme();
+      }
+    });
+
+    // 保留窗口resize监听
+    window.addEventListener('resize', setVh);
+    init();
+  </script>
+</body>
+</html>
