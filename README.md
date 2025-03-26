@@ -1,4 +1,4 @@
 # KB
 Klein.Blue
 
-an index page with random themes
+a simple index page with random themes
