@@ -24,6 +24,8 @@
       transition: 
         transform 0.1s ease, /* 缩放动画 */
         opacity 0.3s ease;  /* 淡入效果 */
+      /* 修复某些安卓设备的点击外框 */
+      -webkit-tap-highlight-color: transparent;
       /* 禁用 iOS 长按弹出菜单 */
       -webkit-touch-callout: none;
       /* 禁用 iOS Safari 和其他 WebKit 内核浏览器的文本选择 */
@@ -34,6 +36,7 @@
       -ms-user-select: none;
       /* 标准语法 */
       user-select: none;
+      /* 移除移动端点击高亮 */
       -webkit-tap-highlight-color: transparent;
       outline: none;
     }
@@ -49,6 +52,7 @@
     a {
       display: inline-block;
       text-decoration: none;
+      /* 移除移动端点击高亮 */
       -webkit-tap-highlight-color: transparent;
     }
   </style>
