@@ -24,11 +24,17 @@
       transition: 
         transform 0.1s ease, /* 缩放动画 */
         opacity 0.3s ease;  /* 淡入效果 */
+      /* 修复某些安卓设备的点击外框 */
       -webkit-tap-highlight-color: transparent;
+      /* 禁用 iOS 长按弹出菜单 */
       -webkit-touch-callout: none;
+      /* 禁用 iOS Safari 和其他 WebKit 内核浏览器的文本选择 */
       -webkit-user-select: none;
+      /* 适用于 Firefox */
       -moz-user-select: none;
+      /* 适用于 IE10+ 和 Edge */
       -ms-user-select: none;
+      /* 标准语法 */
       user-select: none;
       outline: none;
     }
@@ -52,14 +58,36 @@
     h1, p {
       margin: 0;
       transition: color 0.3s ease; /* 与背景过渡同步 */
+      /* 修复某些安卓设备的点击外框 */
+      -webkit-tap-highlight-color: transparent;
+      /* 禁用 iOS 长按弹出菜单 */
+      -webkit-touch-callout: none;
+      /* 禁用 iOS Safari 和其他 WebKit 内核浏览器的文本选择 */
+      -webkit-user-select: none;
+      /* 适用于 Firefox */
+      -moz-user-select: none;
+      /* 适用于 IE10+ 和 Edge */
+      -ms-user-select: none;
+      /* 标准语法 */
+      user-select: none;
     }
 
     h1 {
       font-size: 4em; /* 可根据需要调整 */
+      font-family:
+        "PingFang SC",     /* 苹方（macOS/iOS） */
+        "Microsoft YaHei", /* 微软雅黑（Windows） */
+        "Noto Sans SC",    /* 思源黑体（Linux/Android） */
+        sans-serif;        /* 最终回退到无衬线字体 */
     }
 
     p {
       font-size: 1.5em; /* 可根据需要调整 */
+      font-family:
+        "PingFang SC",     /* 苹方（macOS/iOS） */
+        "Microsoft YaHei", /* 微软雅黑（Windows） */
+        "Noto Sans SC",    /* 思源黑体（Linux/Android） */
+        sans-serif;        /* 最终回退到无衬线字体 */
     }
   </style>
 </head>
